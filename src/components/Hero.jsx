@@ -67,7 +67,7 @@ const Hero = ({ scrollContainer }) => {
           </div>
         </div>
 
-        {/* Background Elements */}
+    
         <img className="parallax__stars" src="./parallax/1Stars.svg" alt="" />
         <img className="parallax__planets" src="./parallax/2Planets.svg" alt="" />
         <img className="parallax__mountain1" src="./parallax/3Mountain.svg" alt="" />
@@ -97,7 +97,7 @@ const Hero = ({ scrollContainer }) => {
         </div>
       </div>
 
-      {/* Background Elements */}
+
       <img className="parallax__stars" src="./parallax/1Stars.svg" alt="" />
       <img className="parallax__planets" src="./parallax/2Planets.svg" alt="" />
       <img className="parallax__mountain1" src="./parallax/3Mountain.svg" alt="" />

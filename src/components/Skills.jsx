@@ -19,38 +19,35 @@ const SkillCard = ({ title, icon: Icon, skills, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
     >
-      {/* Background Layers */}
+    
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a1f35] to-[#0d3b5c] rounded-2xl" />
       <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 rounded-2xl" />
       <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/20 rounded-2xl" />
       
-      {/* Card Content Container */}
+    
       <div className="relative h-full p-6 flex flex-col">
-        {/* Glowing Border Effect */}
+        
         <div className="absolute inset-[1px] rounded-2xl bg-gradient-to-br from-[#1a4b6d]/50 to-transparent 
           opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        {/* Card Header */}
+       
         <div className="relative">
           <div className="flex items-center gap-4 mb-8">
-            {/* Icon Container */}
+            
             <div className="p-3 bg-gradient-to-br from-[#1a4b6d] to-[#0d3b5c] rounded-xl
               shadow-lg shadow-black/20 border border-white/5 group-hover:border-white/10 
               transition-colors duration-300">
               <Icon className="w-7 h-7 text-[#4a9eff]" />
             </div>
-            {/* Title */}
+           
             <h3 className="text-white text-2xl font-bold tracking-wide">
               {title}
             </h3>
           </div>
           
-          {/* Decorative Line */}
           <div className="h-[1px] w-full bg-gradient-to-r from-[#1a4b6d] via-[#4a9eff]/20 to-transparent
             mb-6" />
         </div>
-
-        {/* Skills Grid */}
         <div className="grid grid-cols-2 gap-3 flex-grow">
           {skills.map((skill, skillIndex) => (
             <motion.div
@@ -60,15 +57,12 @@ const SkillCard = ({ title, icon: Icon, skills, index }) => {
               transition={{ delay: skillIndex * 0.1 }}
               className="group/skill relative"
             >
-              {/* Skill Item */}
               <div className="relative bg-black/20 backdrop-blur-sm rounded-xl p-3 h-full
                 border border-white/5 hover:border-white/20 transition-colors duration-300
                 overflow-hidden">
-                {/* Hover Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#1a4b6d]/0 via-[#4a9eff]/5 to-[#1a4b6d]/0
                   opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300" />
                 
-                {/* Skill Text */}
                 <span className="relative text-white/80 text-sm font-medium leading-snug
                   group-hover/skill:text-white transition-colors duration-300">
                   {skill}
@@ -159,11 +153,12 @@ const Skills = () => {
       title: "Hard Skills",
       icon: Cog,
       skills: [
+        "Data Structures",
+        "Algorithm Design",
         "Object-Oriented Programming",
         "SOLID Principles",
         "Operating System",
         "Networking",
-        "Schemas"
       ]
     },
     {
@@ -174,7 +169,7 @@ const Skills = () => {
         "Dart",
         "Kotlin",
         "Python",
-        "C++",
+        "TypeScript",
         "JavaScript"
       ]
     },
@@ -186,7 +181,8 @@ const Skills = () => {
         "Android",
         "Widget Testing",
         "API Integration",
-        "State Management"
+        "State Management",
+        "Klint"
       ]
     },
     {
@@ -196,7 +192,9 @@ const Skills = () => {
         "React.js",
         "Node.js",
         "Astro",
-        "RESTful APIs"
+        "RESTful APIs",
+        "Tailwind CSS",
+        "HTML 5"
       ]
     },
     {
@@ -214,14 +212,11 @@ const Skills = () => {
   ];
 
   return (
-    <div className="relative min-h-screen">
-      {/* Background Effects */}
+    <div className="relative pb-20"> 
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent 
           via-[#0d3b5c]/5 to-transparent" />
       </div>
-      
-      {/* Section Title */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -237,7 +232,6 @@ const Skills = () => {
         />
       </motion.div>
 
-      {/* Scrolling Skills Section */}
       <ScrollingSkills skillsData={skillsData} />
     </div>
   );

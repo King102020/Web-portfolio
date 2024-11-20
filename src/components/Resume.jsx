@@ -38,5 +38,4 @@ const Resume = () => {
   );
 };
 
-// Add custom padding to the SectionWrapper for this component
-export default SectionWrapper(Resume, "resume", "py-16"); // Reduced padding
+export default SectionWrapper(Resume, "resume", "py-16"); 

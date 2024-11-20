@@ -34,7 +34,7 @@ const projects = [
     techStack: ["Kotlin", "MVVM", "Room Database", "Retrofit", "Picasso", "XML"]
   },
   {
-    name: "Streamlit Data Dashboard",
+    name: "Fintess Guid Dashboard",
     description: "A comprehensive data visualization dashboard built using Streamlit and Python.",
     image: streamlitDashboard,
     githubLink: "#",
@@ -65,7 +65,7 @@ const ProjectCard = ({
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Background animation */}
+
       <motion.div 
         className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"
         animate={{
@@ -79,7 +79,7 @@ const ProjectCard = ({
       />
 
       <div className="flex flex-col lg:flex-row gap-12 relative z-10">
-        {/* Left side - Project details */}
+     
         <motion.div 
           className="lg:w-1/2 flex flex-col justify-between"
           initial={{ opacity: 0, x: -50 }}
@@ -163,7 +163,7 @@ const ProjectCard = ({
           </div>
         </motion.div>
 
-        {/* Right side - Project image */}
+  
         <motion.div 
           className="lg:w-1/2"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -176,7 +176,7 @@ const ProjectCard = ({
               alt={name}
               className="w-full h-full object-contain"
             />
-            {/* Overlay gradient */}
+    
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         </motion.div>

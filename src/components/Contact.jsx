@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import React, { useRef } from "react";
-import { Github, Linkedin, Mail, Twitter, FileDown, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, FileDown, XIcon } from 'lucide-react';
 import { SectionWrapper } from "../hoc";
 
 const Contact = () => {
@@ -23,10 +23,10 @@ const Contact = () => {
       description: 'Check out my projects'
     },
     {
-      name: 'Twitter',
-      icon: <Twitter className="w-6 h-6" />,
+      name: 'X',
+      icon: <XIcon className="w-6 h-6" />,
       href: 'https://x.com/Bubble_Trouper',
-      color: 'hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10',
+      color: 'hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10', 
       description: 'Follow me for updates'
     },
     {
@@ -63,10 +63,10 @@ const Contact = () => {
 
   return (
     <footer ref={containerRef} className="relative overflow-hidden pt-20 pb-12">
-      {/* Animated Background */}
+
       <div className="absolute inset-0 bg-gradient-to-b from-primary via-[#0a1f35] to-[#050816]">
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20"></div>
-        {/* Animated stars/particles */}
+      
         {[...Array(100)].map((_, i) => (
           <motion.div
             key={i}
@@ -90,7 +90,7 @@ const Contact = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Main Content */}
+       
         <div className="flex flex-col items-center text-center mb-20">
           <motion.div
             animate={isInView ? { scale: [0.5, 1], opacity: [0, 1] } : {}}
@@ -107,7 +107,7 @@ const Contact = () => {
             </p>
           </motion.div>
 
-          {/* Resume Download Card */}
+         
           <motion.div
             animate={floatingAnimation}
             className="w-full max-w-md bg-gradient-to-br from-blue-500/10 to-purple-500/10 
@@ -134,7 +134,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Social Links Grid */}
+        
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {socialLinks.map((link, index) => (
               <motion.a
@@ -162,7 +162,7 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Copyright Section */}
+       
         <motion.div 
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
