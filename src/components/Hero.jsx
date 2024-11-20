@@ -19,7 +19,7 @@ const Position = ({ isMobile }) => {
       ${isMobile ? 'text-[16px] leading-tight mt-1' : 'text-[14px] xs:text-[18px] sm:text-[26px] md:text-[32px] 2xl:text-[62px] leading-[28px] 2xl:leading-[36px] w-full flex justify-center items-center'}
     `}>
       {isMobile ? (
-        <div className="text-white/80">AI/ML Enthusiast</div>
+        <div className="text-white/80">Software Developer</div>
       ) : (
         <div className="absolute inset-0 top-[-34px] sm:top-[-14px] lg:top-[-4px] flex flex-col">
           <div className="text first absolute left-1 md:left-2 2xl:left-4 flex" aria-label="Software Developer">
