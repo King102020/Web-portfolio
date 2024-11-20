@@ -51,7 +51,7 @@ const Hero = ({ scrollContainer }) => {
     return (
       <section className="parallax">
         <div className="parallax__content w-full mx-auto flex flex-col z-10">
-          <div className="flex flex-col px-6 pt-20">
+          <div className="flex flex-col px-6 pt-11">
             <div className='font-bold text-[22px] xs:text-[26px] sm:text-[30px] text-white mb-8 leading-tight streaky-glow'>
               Transforming ideas<br />
               into elegant solutions<br />
