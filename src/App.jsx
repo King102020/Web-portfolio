@@ -22,9 +22,6 @@ const App = () => {
           <div id="skills" className='relative z-30 bg-primary'>
             <Skills />
           </div>
-          <div id="resume" className='relative z-30 bg-primary'>
-            <Resume />
-          </div>
           <div id="contact" className='relative z-30 bg-primary'>
             <Contact />
           </div>
