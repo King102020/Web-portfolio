@@ -37,11 +37,10 @@ const experiences = [
     company_name: "AZUSOL GLOBAL LLP",
     date: "Mar 2024 - Present",
     details: [
-      "Developed and evaluated code for <span style='color: #60A5FA;'>mobile and web-based applications</span> while ensuring high functionality across diverse platforms.",
-      "Implemented innovative features using <span style='color: #60A5FA;'>Kotlin</span>, resulting in a significant increase in monthly active users.",
-      "Enhanced the efficiency of the codebase, resulting in a <span style='color: #60A5FA;'>15% decrease in crash rates</span>.",
-      "Engaged in collaborative efforts with engineering colleagues, design professionals, and clientele to develop and enhance software products.",
-      "Participated in <span style='color: #60A5FA;'>code reviews and software design sessions</span> to improve overall product quality."
+      "Developed and evaluated code for <span style='color: #60A5FA;'>mobile and web-based applications</span> while ensuring high functionality across diverse platforms",
+      "Reduced app crash rates by <span style='color: #60A5FA;'>15%</span> through systematic troubleshooting and establishing error handling protocols",
+      "Coordinated with <span style='color: #60A5FA;'>product managers and design teams</span> to improve user experience and application stability",
+      "Conducted thorough <span style='color: #60A5FA;'>code reviews</span> and maintained version control standards using Git"
     ],
   },
   {
@@ -49,10 +48,10 @@ const experiences = [
     company_name: "Arresto Solution Pvt Ltd",
     date: "May 2023 - Aug 2023",
     details: [
-      "Coordinated efforts between <span style='color: #60A5FA;'>development and QA teams</span>, addressing critical feedback from beta testers.",
-      "Directly contributed findings that resolved <span style='color: #60A5FA;'>three major causes of app crashes</span> within two release cycles.",
-      "Conducted thorough bug fixes and maintained code integrity through <span style='color: #60A5FA;'>regular monitoring</span> of technology implementations.",
-      "Collaborated with senior developers to implement new features and improve existing functionality."
+      "Implemented innovative features using <span style='color: #60A5FA;'>Kotlin</span>, resulting in measurable increase in monthly active users",
+      "Enhanced codebase efficiency, contributing to a <span style='color: #60A5FA;'>15% decrease</span> in application crash rates",
+      "Engaged in collaborative efforts with <span style='color: #60A5FA;'>engineering colleagues and design professionals</span> to develop and enhance software products",
+      "Integrated <span style='color: #60A5FA;'>third-party services and RESTful APIs</span> while maintaining consistent performance metrics"
     ],
   },
 ];
