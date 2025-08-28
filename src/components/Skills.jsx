@@ -118,7 +118,7 @@ const ScrollingSkills = ({ skillsData }) => {
   }, [controls]);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {/* Gradient Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-40 z-10
         bg-gradient-to-r from-[#001524] to-transparent pointer-events-none" />
@@ -126,7 +126,7 @@ const ScrollingSkills = ({ skillsData }) => {
         bg-gradient-to-l from-[#001524] to-transparent pointer-events-none" />
 
       {/* Scrolling Container */}
-      <div ref={scrollRef} className="overflow-hidden py-10">
+      <div ref={scrollRef} className="overflow-hidden py-10 w-full">
         <motion.div 
           animate={controls}
           className="flex gap-8 w-fit px-4"
@@ -212,29 +212,37 @@ const Skills = () => {
   ];
 
   return (
-    <div className="relative pb-20"> 
+    // Changed from relative with padding to full-width container
+    <div className="w-full min-h-screen bg-primary overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent 
           via-[#0d3b5c]/5 to-transparent" />
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        className="text-center relative mb-20"
-      >
-        <h2 className={`${styles.sectionText}`}>Skills</h2>
+      
+      {/* Title section with container for proper spacing */}
+      <div className="relative z-10 px-4 md:px-8 lg:px-16 pt-20">
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ delay: 0.3 }}
-          className="h-1 w-20 bg-gradient-to-r from-transparent via-[#4a9eff] to-transparent 
-            mx-auto mt-4"
-        />
-      </motion.div>
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center relative mb-20"
+        >
+          <h2 className={`${styles.sectionText}`}>Skills</h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.3 }}
+            className="h-1 w-20 bg-gradient-to-r from-transparent via-[#4a9eff] to-transparent 
+              mx-auto mt-4"
+          />
+        </motion.div>
+      </div>
 
-      <ScrollingSkills skillsData={skillsData} />
+      {/* Full-width scrolling skills section */}
+      <div className="relative z-10">
+        <ScrollingSkills skillsData={skillsData} />
+      </div>
     </div>
   );
 };
 
-export default SectionWrapper(Skills, "skills");
+export default Skills;

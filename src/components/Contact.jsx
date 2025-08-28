@@ -1,11 +1,32 @@
 import { motion, useInView } from "framer-motion";
-import React, { useRef } from "react";
-import { Github, Linkedin, Mail, ExternalLink, FileDown, XIcon } from 'lucide-react';
-import { SectionWrapper } from "../hoc";
+import React, { useRef, useState } from "react";
+import { Github, Linkedin, Mail, ExternalLink, FileDown, XIcon, Loader2 } from 'lucide-react';
 
 const Contact = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: false });
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    try {
+      setIsDownloading(true);
+      
+      // Create a temporary delay to show loading state
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Create download link
+      const link = document.createElement('a');
+      link.href = '/resume.pdf';
+      link.download = 'Parag_Jain_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Download failed:', error);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   const socialLinks = [
     {
@@ -62,18 +83,20 @@ const Contact = () => {
   };
 
   return (
-    <footer ref={containerRef} className="relative overflow-hidden pt-20 pb-12">
-
+    // Changed to full-width container
+    <footer ref={containerRef} className="relative w-full min-h-screen overflow-hidden">
+      {/* Background with full width */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary via-[#0a1f35] to-[#050816]">
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20"></div>
       
+        {/* Animated stars */}
         {[...Array(100)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
               opacity: Math.random()
             }}
             animate={{
@@ -89,25 +112,26 @@ const Contact = () => {
         ))}
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+      {/* Content container with proper padding */}
+      <div className="relative z-10 w-full px-6 lg:px-16 xl:px-24 2xl:px-32 pt-20 pb-12">
        
-        <div className="flex flex-col items-center text-center mb-20">
+        <div className="flex flex-col items-center text-center mb-20 max-w-7xl mx-auto">
           <motion.div
             animate={isInView ? { scale: [0.5, 1], opacity: [0, 1] } : {}}
             transition={{ duration: 0.5 }}
             className="mb-12"
           >
-            <h2 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent 
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent 
                          bg-gradient-to-r from-blue-400 to-purple-600 mb-6">
               Let's Connect
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
               I'm always excited to collaborate on interesting projects and explore new opportunities.
               Let's create something amazing together!
             </p>
           </motion.div>
 
-         
+          {/* Resume Download Card */}
           <motion.div
             animate={floatingAnimation}
             className="w-full max-w-md bg-gradient-to-br from-blue-500/10 to-purple-500/10 
@@ -119,23 +143,34 @@ const Contact = () => {
               <p className="text-gray-400 text-center">
                 Download my resume to learn more about my experience and skills
               </p>
-              <motion.a
-                href="/resume.pdf"
-                download="Parag_Jain_Resume.pdf"
-                className="flex items-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 
-                         text-blue-400 px-8 py-4 rounded-xl transition-all duration-300
-                         border border-blue-500/30 hover:border-blue-500/50 group
-                         hover:scale-105 active:scale-95"
-                whileHover={{ y: -3 }}
+              <motion.button
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className={`flex items-center gap-2 px-8 py-4 rounded-xl transition-all duration-300
+                         border group hover:scale-105 active:scale-95 font-medium
+                         ${isDownloading 
+                           ? 'bg-gray-500/20 text-gray-400 border-gray-500/30 cursor-not-allowed' 
+                           : 'bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border-blue-500/30 hover:border-blue-500/50'
+                         }`}
+                whileHover={!isDownloading ? { y: -3 } : {}}
               >
-                <FileDown className="w-5 h-5 group-hover:animate-bounce" />
-                <span className="font-medium">Download Resume</span>
-              </motion.a>
+                {isDownloading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Downloading...</span>
+                  </>
+                ) : (
+                  <>
+                    <FileDown className="w-5 h-5 group-hover:animate-bounce" />
+                    <span>Download Resume</span>
+                  </>
+                )}
+              </motion.button>
             </div>
           </motion.div>
 
-        
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+          {/* Social Links Grid - Responsive for different screen sizes */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
             {socialLinks.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -146,12 +181,12 @@ const Contact = () => {
                 variants={cardVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className={`flex flex-col items-center p-6 rounded-xl
+                className={`flex flex-col items-center p-6 lg:p-8 rounded-xl
                            bg-white/5 backdrop-blur-sm border border-white/10
                            ${link.color} transition-all duration-300
-                           hover:border-white/20 hover:-translate-y-2`}
+                           hover:border-white/20 hover:-translate-y-2 group`}
               >
-                <div className="p-4 rounded-full bg-white/5 mb-4">
+                <div className="p-4 rounded-full bg-white/5 mb-4 group-hover:scale-110 transition-transform">
                   {link.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{link.name}</h3>
@@ -162,22 +197,21 @@ const Contact = () => {
           </div>
         </div>
 
-       
+        {/* Footer */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5 }}
-          className="relative text-center space-y-4"
+          className="relative text-center space-y-4 max-w-7xl mx-auto"
         >
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-8"></div>
-          <p className="text-gray-400">
+          <p className="text-gray-400 text-lg">
             © {new Date().getFullYear()} Parag Jain. All rights reserved.
           </p>
-      
         </motion.div>
       </div>
     </footer>
   );
 };
 
-export default SectionWrapper(Contact, "contact");
+export default Contact;

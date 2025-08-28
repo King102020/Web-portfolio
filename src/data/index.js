@@ -33,14 +33,26 @@ export const navLinks = [
 
 const experiences = [
   {
+    title: "Flutter Developer",
+    company_name: "UPDOT",
+    date: "May 2025 - Present",
+    details: [
+      "Managed live production app with more than <span style='color: #60A5FA;'>ten thousand active users</span> across Android and iOS platforms using Flutter, Provider, and Firebase ecosystem",
+      "Implemented core features including <span style='color: #60A5FA;'>push notifications, deep linking</span>, Firebase Analytics, content management system integration using REST APIs, and <span style='color: #60A5FA;'>payment gateway</span> with secure authentication",
+      "Maintained app store presence on <span style='color: #60A5FA;'>Google Play Store and Apple App Store</span>, handling releases, updates, and compliance requirements while monitoring store performance metrics",
+      "Minimized crash rates through proactive <span style='color: #60A5FA;'>error monitoring</span>, exception handling, and <span style='color: #60A5FA;'>performance optimization</span> using Firebase Crashlytics and custom logging solutions"
+    ],
+  },
+  {
     title: "Software Developer",
     company_name: "AZUSOL GLOBAL LLP",
-    date: "Mar 2024 - Present",
+    date: "Apr 2024 - May 2025",
     details: [
-      "Developed and evaluated code for <span style='color: #60A5FA;'>mobile and web-based applications</span> while ensuring high functionality across diverse platforms",
-      "Reduced app crash rates by <span style='color: #60A5FA;'>15%</span> through systematic troubleshooting and establishing error handling protocols",
-      "Coordinated with <span style='color: #60A5FA;'>product managers and design teams</span> to improve user experience and application stability",
-      "Conducted thorough <span style='color: #60A5FA;'>code reviews</span> and maintained version control standards using Git"
+      "Developed, designed and evaluated code for mobile and web-based applications in <span style='color: #60A5FA;'>Flutter</span> while ensuring high functionality across diverse platforms, with <span style='color: #60A5FA;'>BLoC and GetX</span> for state management",
+      "Integrated <span style='color: #60A5FA;'>real-time APIs</span> and local databases like <span style='color: #60A5FA;'>Hive and SQLite</span>, ensuring seamless data flow at scale",
+      "Improved service reliability and reduced latency through systematic debugging and optimizations",
+      "Worked with <span style='color: #60A5FA;'>Microsoft Azure</span>, implementing AI-driven features and cloud-native solutions",
+      "Engaged in daily stand-ups and sprint planning to support iterative development and team alignment"
     ],
   },
   {

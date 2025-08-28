@@ -1,166 +1,172 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Calendar, MapPin, ChevronDown, ChevronUp } from "lucide-react";
+
 import { experiences } from "../data";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
-import { textVariant } from "../utils/motion";
-import { BriefcaseIcon, ChevronRightIcon } from "lucide-react";
+import { textVariant, fadeIn } from "../utils/motion";
 
-const ExperienceCard = ({ experience, onClick, isActive, isMobile }) => {
+const ExperienceCard = ({ experience, index, isExpanded, onToggle }) => {
   return (
     <motion.div
-      onClick={onClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={`
-        cursor-pointer mb-6 p-6 max-w-2xl relative rounded-xl
-        bg-gradient-to-br from-slate-800/50 to-slate-900/50
-        border border-slate-700/30 backdrop-blur-sm
-        transition-all duration-300
-        ${isActive ? "shadow-xl shadow-blue-500/10" : ""}
-      `}
+      variants={fadeIn("up", "spring", index * 0.2, 0.6)}
+      className="relative bg-tertiary/80 backdrop-blur-sm rounded-xl border border-slate-700/30 
+                 hover:border-blue-500/40 transition-all duration-300 overflow-hidden group"
     >
-      {isActive && (
-        <motion.div
-          layoutId="activeIndicator"
-          className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-400 to-blue-600 rounded-l-xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        />
-      )}
+      {/* Header - Always Visible */}
+      <div 
+        className="p-4 sm:p-6 cursor-pointer"
+        onClick={onToggle}
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="flex-1">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-300 
+                               transition-colors duration-300 mb-1">
+                  {experience.title}
+                </h3>
+                <div className="flex items-center gap-2 text-blue-400 font-medium text-sm sm:text-base mb-2">
+                  <MapPin className="w-4 h-4" />
+                  <span>{experience.company_name}</span>
+                </div>
+              </div>
+              
+              {/* Toggle Icon */}
+              <div className="ml-4 p-2 rounded-full bg-slate-700/50 hover:bg-slate-600/50 
+                              transition-colors duration-200 sm:hidden">
+                {isExpanded ? (
+                  <ChevronUp className="w-4 h-4 text-blue-400" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-blue-400" />
+                )}
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2 text-slate-400 text-sm">
+              <Calendar className="w-4 h-4" />
+              <span>{experience.date}</span>
+              {experience.date.includes('Present') && (
+                <span className="ml-2 px-2 py-1 bg-green-500/20 text-green-300 text-xs 
+                               rounded-full border border-green-500/30">
+                  Current
+                </span>
+              )}
+            </div>
+          </div>
 
-      <div className="flex items-start gap-4">
-        <div className={`p-3 rounded-lg ${isActive ? "bg-blue-500/20" : "bg-slate-700/20"}`}>
-          <BriefcaseIcon className={`w-6 h-6 ${isActive ? "text-blue-400" : "text-slate-400"}`} />
+          {/* Desktop Toggle */}
+          <div className="hidden sm:block p-2 rounded-full bg-slate-700/50 hover:bg-slate-600/50 
+                          transition-colors duration-200">
+            {isExpanded ? (
+              <ChevronUp className="w-5 h-5 text-blue-400" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-blue-400" />
+            )}
+          </div>
         </div>
-
-        <div className="flex-1">
-          <h3 className={`text-xl font-bold mb-2 ${isActive ? "text-blue-400" : "text-slate-400"}`}>
-            {experience.title}
-          </h3>
-          <p className={`text-base ${isActive ? "text-slate-200" : "text-slate-400"}`}>
-            {experience.company_name}
-          </p>
-          <p className="text-sm text-slate-500 mt-1">{experience.date}</p>
-        </div>
-
-        <ChevronRightIcon 
-          className={`w-5 h-5 mt-2 transition-transform duration-300 
-          ${isActive ? "text-blue-400 rotate-90" : "text-slate-600"}`}
-        />
       </div>
 
-      {/* Mobile Details */}
-      {isMobile && isActive && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="mt-6 pt-6 border-t border-slate-700/30"
-        >
-          <ul className="space-y-4">
-            {experience.details.map((detail, index) => (
+      {/* Expandable Details */}
+      <motion.div
+        initial={false}
+        animate={{ 
+          height: isExpanded ? "auto" : 0,
+          opacity: isExpanded ? 1 : 0
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="overflow-hidden"
+      >
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-slate-700/30">
+          <ul className="space-y-3 mt-4">
+            {experience.details.map((detail, detailIndex) => (
               <motion.li
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
+                key={detailIndex}
+                initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: detailIndex * 0.1 }}
                 className="flex items-start gap-3"
               >
-                <div className="mt-1.5 w-2 h-2 rounded-full bg-blue-500/50 flex-shrink-0" />
+                <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
                 <p 
-                  className="text-slate-300 text-sm leading-relaxed"
+                  className="text-slate-300 text-sm sm:text-base leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: detail }}
                 />
               </motion.li>
             ))}
           </ul>
-        </motion.div>
-      )}
-    </motion.div>
-  );
-};
-
-const ExperienceDetails = ({ experience }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="mt-5 bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 backdrop-blur-sm"
-    >
-      <ul className="space-y-6">
-        {experience.details.map((detail, index) => (
-          <motion.li
-            key={index}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="flex items-start gap-4 group"
-          >
-            <div className="mt-1.5 w-2 h-2 rounded-full bg-blue-500/50 group-hover:bg-blue-400 transition-colors" />
-            <p 
-              className="flex-1 text-slate-300 text-lg leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: detail }}
-            />
-          </motion.li>
-        ))}
-      </ul>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
 
 const Experience = () => {
-  const [selectedJob, setSelectedJob] = useState(experiences[0]);
-  const [isMobile, setIsMobile] = useState(false);
+  const [expandedCards, setExpandedCards] = useState(new Set([0])); // First card expanded by default
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const toggleCard = (index) => {
+    const newExpanded = new Set(expandedCards);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
+    }
+    setExpandedCards(newExpanded);
+  };
 
   return (
-    <div className="pb-20">
-      <motion.div
+    <div>
+      {/* Header */}
+      <motion.div 
         variants={textVariant()}
-        className="text-center mb-16"
+        className="text-center mb-8 sm:mb-12"
       >
-        <h2 className={`${styles.sectionText} relative inline-block`}>
+        <h2 className={`${styles.sectionText} mb-4`}>
           Experience
-          <motion.div
-            className="absolute -bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.5 }}
-          />
         </h2>
+        <div className="h-1 w-16 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+        <p className="text-slate-400 text-base sm:text-lg mt-4 max-w-2xl mx-auto px-4">
+          My professional journey in software development
+        </p>
       </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className={`relative grid ${isMobile ? "grid-cols-1" : "grid-cols-[1fr,1.5fr]"} gap-8`}>
-          <div className="space-y-2">
-            {experiences.map((experience, index) => (
-              <ExperienceCard
-                key={index}
-                experience={experience}
-                onClick={() => setSelectedJob(experience)}
-                isActive={selectedJob === experience}
-                isMobile={isMobile}
-              />
-            ))}
-          </div>
-
-          {!isMobile && (
-            <div className="relative">
-              <div className="sticky top-32">
-                <ExperienceDetails experience={selectedJob} />
-              </div>
-            </div>
-          )}
+      {/* Experience Cards */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="space-y-4 sm:space-y-6">
+          {experiences.map((experience, index) => (
+            <ExperienceCard
+              key={`experience-${index}`}
+              experience={experience}
+              index={index}
+              isExpanded={expandedCards.has(index)}
+              onToggle={() => toggleCard(index)}
+            />
+          ))}
         </div>
+
+        {/* Summary Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8 sm:mt-12 text-center"
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto">
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-400">1+</div>
+              <div className="text-slate-400 text-sm sm:text-base mt-1">Years Experience</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-purple-400">10K+</div>
+              <div className="text-slate-400 text-sm sm:text-base mt-1">Users Impacted</div>
+            </div>
+            <div className="text-center col-span-2 sm:col-span-1">
+              <div className="text-2xl sm:text-3xl font-bold text-green-400">3</div>
+              <div className="text-slate-400 text-sm sm:text-base mt-1">Companies</div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
